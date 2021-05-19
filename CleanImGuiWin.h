@@ -35,7 +35,6 @@ namespace ImGui
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, 1);
 		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-
 		GLFWwindow* window = glfwCreateWindow(private_vars::WIDTH, private_vars::HEIGHT, "ImGUI window", NULL, NULL);
 
 		glfwMakeContextCurrent(window);
@@ -69,12 +68,17 @@ namespace ImGui
 
 
 
+		
+
+
+
 		//TitleBar Buttons		
 		ImGui::SetNextWindowPos({ 0,0 });
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 10,0 });
-		ImGui::Begin("asd", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoResize);
+		ImGui::SetNextWindowSize({ 70,10 });
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 10,2 });		
+		ImGui::Begin("X[]_", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse  | ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground );
 		ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 100);
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 6.2,6 });
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 6.2,4 });
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 5,4 });
 			/*close*/
 			ImGui::PushStyleColor(ImGuiCol_Button, { 0.168f, 0.188f,0.188f,1.0f });
@@ -117,7 +121,7 @@ namespace ImGui
 					private_vars::fullScreen = true;
 				}
 				
-			}
+			}			
 			ImGui::PopStyleColor(3);
 
 
@@ -129,26 +133,26 @@ namespace ImGui
 			if (ImGui::Button("##3"))
 				glfwIconifyWindow(window);
 			ImGui::PopStyleColor(3);
-			ImGui::PopStyleVar(4);
+			ImGui::PopStyleVar(4);			
 			ImGui::End();
-
+			
 			
 
 
-		//MainSpace
-		ImGui::SetNextWindowPos({ 0,0 });
-		ImGui::SetNextWindowSizeConstraints(ImVec2(private_vars::TitleTextLen * 10 + 142, 50), ImVec2(FLT_MAX, FLT_MAX));
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 4,6 });
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowTitleAlign, { 0.5f,0.5f });
-		ImGui::PushStyleColor(ImGuiCol_TitleBg, { 0.14,0.14,0.14,1 });
-		ImGui::PushStyleColor(ImGuiCol_TitleBgActive, { 0.14,0.14,0.14,1 });
-		ImGui::PushStyleColor(ImGuiCol_Text, { 1,1,1,1 });
-		ImGui::Begin(private_vars::TitleText, NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | private_vars::usrFlags);
-		ImGui::PopStyleVar(2);
-		ImGui::PopStyleColor(3);
-		ImGui::SetWindowSize(ImVec2(private_vars::WIDTH, private_vars::HEIGHT));
-
-
+		
+		
+			//MainSpace
+			ImGui::SetNextWindowPos({ 0,0 });
+			ImGui::SetNextWindowSizeConstraints(ImVec2(private_vars::TitleTextLen * 10 + 142, 50), ImVec2(FLT_MAX, FLT_MAX));
+			ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 4,6 });
+			ImGui::PushStyleVar(ImGuiStyleVar_WindowTitleAlign, { 0.5f,0.5f });
+			ImGui::PushStyleColor(ImGuiCol_TitleBg, { 0.14,0.14,0.14,1 });
+			ImGui::PushStyleColor(ImGuiCol_TitleBgActive, { 0.14,0.14,0.14,1 });
+			ImGui::PushStyleColor(ImGuiCol_Text, { 1,1,1,1 });
+			ImGui::Begin(private_vars::TitleText, NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | private_vars::usrFlags);
+			ImGui::PopStyleVar(2);
+			ImGui::PopStyleColor(3);
+			ImGui::SetWindowSize(ImVec2(private_vars::WIDTH, private_vars::HEIGHT));
 
 
 		//** MouseEvent on window **
