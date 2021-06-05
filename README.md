@@ -36,7 +36,8 @@ int main()
 	return 0;
 }
 ```
-![name-of-you-image](https://user-images.githubusercontent.com/52032582/120906699-2fc95c00-c679-11eb-9933-106253913462.png)
+Result:
+![image](https://user-images.githubusercontent.com/52032582/120906921-027dad80-c67b-11eb-9fc0-27bc067352c1.png)
 
 
 This header file will add following functions to ImGui namespace:
@@ -58,3 +59,14 @@ void terminateImGui()
 ```c++ 
 void terminateGLFW(GLFWwindow* window)
 ```
+
+
+
+
+<br><br><br>
+---
+**ImGui:** https://github.com/ocornut/imgui
+
+**GLFW:**  https://www.glfw.org/
+
+**GLEW:**  http://glew.sourceforge.net/
