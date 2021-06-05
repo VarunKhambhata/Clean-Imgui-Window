@@ -24,7 +24,10 @@ int main()
 	while(!glfwWindowShouldClose(window))
 	{
 	   ImGui::StartCleanWindow(window);
-	   // Add ImGui UI elemnts here
+	   // Add ImGui UI elemnts here--------------------
+	   	ImGui::Text("Add ImGui UI elements here");
+		ImGui::Button("Like This");
+	   // ---------------------------------------------
 	   ImGui::EndCleanWindow(window);
 	}
   
@@ -33,6 +36,7 @@ int main()
 	return 0;
 }
 ```
+![name-of-you-image](https://user-images.githubusercontent.com/52032582/120906699-2fc95c00-c679-11eb-9933-106253913462.png)
 
 
 This header file will add following functions to ImGui namespace:
