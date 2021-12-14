@@ -1,7 +1,18 @@
 #pragma once
 #define GLEW_STATIC
+#ifdef _WIN32
+	#define GLFW_EXPOSE_NATIVE_WIN32
+#endif
+#ifdef __linux__
+	#define GLFW_EXPOSE_NATIVE_X11
+#endif
+#ifdef __APPLE__
+	#define GLFW_EXPOSE_NATIVE_COCOA
+#endif
+
 #include <GL/glew.h>
 #include<GLFW/glfw3.h>
+#include<GLFW/glfw3native.h>
 #include<imgui.h>
 #include "imgui_impl_glfw.h"
 #include "imgui_impl_opengl3.h"
@@ -34,11 +45,15 @@ namespace ImGui
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 		glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 		glfwWindowHint(GLFW_RESIZABLE, 1);
-		glfwWindowHint(GLFW_DECORATED, GLFW_FALSE);
-		GLFWwindow* window = glfwCreateWindow(private_vars::WIDTH, private_vars::HEIGHT, "ImGUI window", NULL, NULL);
+		glfwWindowHint(GLFW_TRANSPARENT_FRAMEBUFFER, GLFW_TRUE);
+		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+		GLFWwindow* window = glfwCreateWindow(private_vars::WIDTH, private_vars::HEIGHT, "CleanImGUI window", NULL, NULL);
+		SetLayeredWindowAttributes(glfwGetWin32Window(window), 0, 254, LWA_ALPHA);
 
 		glfwMakeContextCurrent(window);
 		glViewport(0, 0, private_vars::WIDTH, private_vars::HEIGHT);
+		glfwShowWindow(window);
+		glfwSetWindowAttrib(window, GLFW_DECORATED, GLFW_FALSE);
 		glewInit();
 
 		return window;
@@ -51,7 +66,8 @@ namespace ImGui
 		ImGui_ImplGlfw_InitForOpenGL(window, true);
 		ImGui_ImplOpenGL3_Init("#version 130");
 		private_vars::io = ImGui::GetIO();
-		
+		ImGui::GetIO().IniFilename = NULL;
+
 		private_vars::TitleText = Title;
 		while (private_vars::TitleText[private_vars::TitleTextLen] != '\0') private_vars::TitleTextLen++;
 		if (MenuBar) private_vars::usrFlags |= ImGuiWindowFlags_MenuBar;
@@ -74,11 +90,11 @@ namespace ImGui
 
 		//TitleBar Buttons		
 		ImGui::SetNextWindowPos({ 0,0 });
-		ImGui::SetNextWindowSize({ 70,10 });
-		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 10,2 });		
-		ImGui::Begin("X[]_", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse  | ImGuiWindowFlags_NoTitleBar  | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground );
+		ImGui::SetNextWindowSize({ 72,10 });
+		ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, { 10,5 });
+		ImGui::Begin("X[]_", NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoBackground);
 		ImGui::PushStyleVar(ImGuiStyleVar_FrameRounding, 100);
-		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 6.2,4 });
+		ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, { 7.6,1.2 });
 		ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 5,4 });
 			/*close*/
 			ImGui::PushStyleColor(ImGuiCol_Button, { 0.168f, 0.188f,0.188f,1.0f });
@@ -106,7 +122,7 @@ namespace ImGui
 					glfwSetWindowPos(window, private_vars::glfwPosX, private_vars::glfwPosY);
 					glViewport(0, 0, private_vars::WIDTH, private_vars::HEIGHT);
 					private_vars::fullScreen = false;
-					
+					glfwRestoreWindow(window);
 				}
 				else
 				{
@@ -171,6 +187,7 @@ namespace ImGui
 				glfwSetWindowSize(window, private_vars::WIDTH, private_vars::HEIGHT);
 				glViewport(0, 0, private_vars::WIDTH, private_vars::HEIGHT);
 				private_vars::fullScreen = false;
+				glfwRestoreWindow(window);
 			}
 
 			private_vars::glfwPosX += private_vars::delta.x;
@@ -209,7 +226,7 @@ namespace ImGui
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
-		glClearColor(0.2f, 0.2f, 0.2f, 0.0f);
+		glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 	}
 
