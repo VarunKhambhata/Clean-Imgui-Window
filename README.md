@@ -20,7 +20,11 @@ int main()
 {	
 	GLFWwindow* window = ImGui::initGLFW();
 	ImGui::initImGui(window, "Title");
-  
+
+        //Edit ImGui Theme
+	ImGui::GetStyle().Colors[ImGuiCol_WindowBg].w = 1.0f;
+	ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 15);
+
 	while(!glfwWindowShouldClose(window))
 	{
 	   ImGui::StartCleanWindow(window);
