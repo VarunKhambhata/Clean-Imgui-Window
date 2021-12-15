@@ -166,8 +166,7 @@ namespace ImGui
 			ImGui::PushStyleColor(ImGuiCol_TitleBgActive, { 0.14,0.14,0.14,1 });
 			ImGui::PushStyleColor(ImGuiCol_Text, { 1,1,1,1 });
 			ImGui::Begin(private_vars::TitleText, NULL, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoCollapse | ImGuiWindowFlags_NoBringToFrontOnFocus | private_vars::usrFlags);
-			ImGui::PopStyleVar(2);
-			ImGui::PopStyleColor(3);
+
 			ImGui::SetWindowSize(ImVec2(private_vars::WIDTH, private_vars::HEIGHT));
 
 
@@ -220,7 +219,8 @@ namespace ImGui
 	void EndCleanWindow(GLFWwindow* window)
 	{
 		ImGui::End();
-		
+		ImGui::PopStyleVar(2);
+		ImGui::PopStyleColor(3);
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
