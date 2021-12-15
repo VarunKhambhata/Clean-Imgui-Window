@@ -41,7 +41,7 @@ int main()
 }
 ```
 Result:
-![image](https://user-images.githubusercontent.com/52032582/120906921-027dad80-c67b-11eb-9fc0-27bc067352c1.png)
+![image](https://user-images.githubusercontent.com/52032582/146166145-a9b84b23-d58e-4a3b-a4f3-3cd955c347ff.png)
 
 
 This header file will add following functions to ImGui namespace:
